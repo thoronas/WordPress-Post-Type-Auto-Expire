@@ -57,6 +57,7 @@ function factors_daily_expiry(){
 	
 	$expiry_args = array(
 		'post_type' => $post_type,
+		'post_status' => 'publish',
 		'posts_per_page' => -1
 	);
 	
