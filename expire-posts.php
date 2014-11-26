@@ -56,13 +56,14 @@ function factors_daily_expiry(){
 	$current_date_format = "Ymd"; 
 	
 	$expiry_args = array(
-		'post_type' => $post_type,
-		'posts_per_page' => -1
+		'post_type'       => $post_type,
+		'post_status'     => 'publish',
+		'posts_per_page'  => -1
 	);
 	
-	$potential_expired_posts = get_posts($expiry_args);
+	$potential_expired_posts = get_posts( $expiry_args );
 	
-	foreach($potential_expired_posts as $e ){
+	foreach( $potential_expired_posts as $e ){
 
 		$expiry_date = get_post_meta( $e->ID, $meta_key, true );
 
@@ -71,8 +72,8 @@ function factors_daily_expiry(){
 			if( $expiry_date < date( $current_date_format ) ){
 
 				$post_args = array(
-					'ID' 			=> $e->ID,
-					'post_status' 	=> 'draft'
+					'ID'            => $e->ID,
+					'post_status'   => 'draft'
 				); 
 				wp_update_post( $post_args );
 			
